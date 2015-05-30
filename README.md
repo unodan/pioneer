@@ -1,4 +1,3 @@
-# pioneer
-Pioneer Primes
+# Pioneer Primes
 
 Demo implementations of prime number generators
