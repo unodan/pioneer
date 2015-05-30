@@ -4,8 +4,7 @@ function prime0($n) {
 	// Lets time ourself.
 	$time_start = microtime(true);
 
-	echo " 	
-	<div>Prime Numbers = $n<br><br></div>
+	echo "
 	<table class='primes'>
         <tr><th colspan='2'>Dan V0</th></tr>
         <tr><th>#</th><th>Prime</th></tr>";
@@ -13,18 +12,18 @@ function prime0($n) {
     $count = 0;
     for ($x = 2; $count < $n; $x++) {
         $i = 2;
-        $prime = true;
+        $prime = 1;
         $sqrt = sqrt($x);
         if ($x > 2) 
             while ($i <= $sqrt) 
                 if ($x%$i++ == 0) {
-                    $prime = false; 
+                    $prime = 0; 
                     break;
                 } 
         
-        if ($prime) echo "<tr><td>".(++$count)."</td><td>".($x)."</td></tr>";	
+        if ($prime) echo "
+        <tr><td>".(++$count)."</td><td>$x</td></tr>";	
     }
-    
     $runtime = microtime(true) - $time_start;
     
 	echo "
@@ -45,20 +44,16 @@ function prime1($n) {
     $primes = array();
     
     for ($x = 2; $count < $n; $x++) {
-        $prime = true;
-        
-        if ($x > 2) {
-            foreach ($primes as $num) {
+        $prime = 1;
+        if ($x > 2)
+            foreach ($primes as $num)
                 if ($x%$num == 0) {
-                    $prime = false; 
+                    $prime = 0; 
                     break;
                 } 
-            }
-        }   
         
         if ($prime) echo "<tr><td>".(++$count)."</td><td>".($primes[] = $x)."</td></tr>";
     }
-    
     $runtime = microtime(true) - $time_start;
     
 	echo "
@@ -76,8 +71,8 @@ function prime2($n) {
 	// Display output in a table and include some styling.
 	echo " 	
 	<table class='primes'>
-	<tr><th colspan='2'>Dan V2</th></tr>
-	<tr><th>#</th><th>Prime</th></tr>";
+        <tr><th colspan='2'>Dan V2</th></tr>
+        <tr><th>#</th><th>Prime</th></tr>";
 	
 	$count=0; // Prime numbers processed, or index counter.
 	
@@ -120,8 +115,8 @@ function prime3($n) {
 	echo " 	
 	
 	<table class='primes'>
-	<tr><th colspan='2'>Dan V3</th></tr>
-	<tr><th>#</th><th>Prime</th></tr>";
+        <tr><th colspan='2'>Dan V3</th></tr>
+        <tr><th>#</th><th>Prime</th></tr>";
 	
 	$count=0; 
 	for ($i=2; $count < $n; $i++) {
@@ -136,7 +131,6 @@ function prime3($n) {
     
     return $runtime;
 }
- 
    
 function prime4($n) {
 	$time_start = microtime(true);
@@ -144,8 +138,8 @@ function prime4($n) {
 	$total = 0;
 	echo " 	
 	<table class='primes'>
-	<tr><th colspan='2'>Geoff V0</th></tr>
-	<tr><th>#</th><th>Prime</th></tr>";
+        <tr><th colspan='2'>Geoff V0</th></tr>
+        <tr><th>#</th><th>Prime</th></tr>";
 	
 	for ($x = 1; $total < $n; $x++) {
 		$count = 2;
@@ -174,6 +168,7 @@ echo '
 		<meta charset="UTF-8">
 		<title>Pioneer Primes</title>
         <style>
+            h1 {text-align: center;}
             .primes {float:left; border-collapse: collapse; } 
             .primes ~ .primes {margin-left:10px; }
             .primes th { border:solid 1px #000;border-top:solid 1px #aaa;color: #fff;  text-align: center; background: #000;}
@@ -186,7 +181,9 @@ echo '
 
         </style> 
 	</head>
-	<body>';
+	<body>
+    <h1>Pioneer Primes</h1>';
+        
 		$functions = array(
             array('Dan Huckson V0' => prime0($max)), 
             array('Dan Huckson V1' => prime1($max)),
@@ -197,12 +194,12 @@ echo '
         
         echo " 
         <table class='results'>
-            <tr><th colspan='3'>Runtime Results</th></tr> ";
+            <tr><th colspan='3'>Runtime Results<br>First $max Prime Numbers</th></tr> ";
             foreach ($functions as $function) {
             echo "
             <tr>";
                 foreach ($function as $key => $time) {
-                echo "<td>$key</td><td>&gt;</td><td>$time</td>"; 
+                echo "<td>$key</td><td>»</td><td>$time</td>"; 
             }
             echo " 
             </tr>";
