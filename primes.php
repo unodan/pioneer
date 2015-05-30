@@ -1,6 +1,5 @@
 <?php
-
-    
+ 
 
 function prime0($n) {
 	// Lets time ourself.
@@ -28,9 +27,12 @@ function prime0($n) {
         if ($prime) echo "<tr><td>".(++$count)."</td><td>".($x)."</td></tr>";	
     }
     
+    $runtime = microtime(true) - $time_start;
+    
 	echo "
-	</table>
-	<div>".(microtime(true) - $time_start)." seconds.</div>";
+	</table>";
+    
+    return $runtime;
 }
 
 function prime1($n) {
@@ -60,10 +62,12 @@ function prime1($n) {
         if ($prime) echo "<tr><td>".(++$count)."</td><td>".($primes[] = $x)."</td></tr>";
     }
     
+    $runtime = microtime(true) - $time_start;
     
 	echo "
-	</table>
-	<div>".(microtime(true) - $time_start)." seconds.</div>";
+	</table>";
+    
+    return $runtime;
 }
 
 function prime2($n) {
@@ -102,10 +106,13 @@ function prime2($n) {
 			echo "<tr><td>".(++$count)."</td><td>$i</td></tr>";	
 	}
 
-	// All done, Calculate and display total run time. 
+	// All done, Calculate and display total runtime. 
+    $runtime = microtime(true) - $time_start;
+    
 	echo "
-	</table>
-	<div>".(microtime(true) - $time_start)." seconds.</div>";
+	</table>";
+    
+    return $runtime;
 }
 
 function prime3($n) {
@@ -126,10 +133,13 @@ function prime3($n) {
         if (!gmp_intval(gmp_mod(gmp_add(gmp_fact(($i-1)),1),$i))) 
             echo "<tr><td>".(++$count)."</td><td>$i</td></tr>";	
 	}
-
+    
+    $runtime = microtime(true) - $time_start;
+    
 	echo "
-	</table>
-	<div>".(microtime(true) - $time_start)." seconds.</div>";
+	</table>";
+    
+    return $runtime;
 }
  
    
@@ -140,7 +150,7 @@ function prime4($n) {
 	echo " 	
 	<style>.test-table {float:left;} .test-table td {border:solid 1px #000;}</style> 
 	<table class='test-table'>
-	<tr><td colspan='2'>Geoff</td></tr>
+	<tr><td colspan='2'>Geoff prime4</td></tr>
 	<tr><td>Count</td><td>Prime Number</td></tr>";
 	
 	for ($x = 1; $total < $n; $x++) {
@@ -152,11 +162,16 @@ function prime4($n) {
     		echo "<tr><td>".(++$total)."</td><td>$x</td></tr>";	
 		}
 	}
+    
+    $runtime = microtime(true) - $time_start;
+    
 	echo "
-	</table>
-	<div>".(microtime(true) - $time_start)." seconds.</div>";
+	</table>";
+    
+    return $runtime;
 }
 
+$max = 1000;
 set_time_limit(0);
 echo '
 <!DOCTYPE html>
@@ -166,11 +181,16 @@ echo '
 		<title></title>
 	</head>
 	<body>';
-		prime0(1000);
-		prime1(1000);
-		prime2(1000);
-		prime3(1000);
-		prime4(1000);
+		$times = array(
+            prime0($max), 
+            prime1($max),
+            prime2($max),
+            prime3($max),
+            prime4($max)
+        );
+        foreach ($times as $i => $time) {
+           echo "<div>prime$i = $time</div>"; 
+        }
 	echo '
 	</body>
 </html>';
