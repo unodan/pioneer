@@ -1,16 +1,14 @@
 <?php
- 
 
 function prime0($n) {
 	// Lets time ourself.
 	$time_start = microtime(true);
 
 	echo " 	
-	<style>.test-table {float:left;} .test-table td {border:solid 1px #000;}</style> 
 	<div>Prime Numbers = $n<br><br></div>
-	<table class='test-table'>
-	<tr><td colspan='2'>Dan Huckson prime0</td></tr>
-	<tr><td>Count</td><td>Prime Number</td></tr>";
+	<table class='primes'>
+        <tr><th colspan='2'>Dan V0</th></tr>
+        <tr><th>#</th><th>Prime</th></tr>";
     
     $count = 0;
     for ($x = 2; $count < $n; $x++) {
@@ -39,10 +37,9 @@ function prime1($n) {
 	$time_start = microtime(true);
 
 	echo " 	
-	<style>.test-table {float:left;} .test-table td {border:solid 1px #000;}</style> 
-	<table class='test-table'>
-	<tr><td colspan='2'>Dan Huckson prime1</td></tr>
-	<tr><td>Count</td><td>Prime Number</td></tr>";
+	<table class='primes'>
+	<tr><th colspan='2'>Dan V1</th></tr>
+	<tr><th>#</th><th>Prime</th></tr>";
     
     $count = 0;
     $primes = array();
@@ -78,10 +75,9 @@ function prime2($n) {
 	
 	// Display output in a table and include some styling.
 	echo " 	
-	<style>.test-table {float:left;} .test-table td {border:solid 1px #000;}</style> 
-	<table class='test-table'>
-	<tr><td colspan='2'>Dan Huckson prime2</td></tr>
-	<tr><td>Count</td><td>Prime Number</td></tr>";
+	<table class='primes'>
+	<tr><th colspan='2'>Dan V2</th></tr>
+	<tr><th>#</th><th>Prime</th></tr>";
 	
 	$count=0; // Prime numbers processed, or index counter.
 	
@@ -122,11 +118,10 @@ function prime3($n) {
 	$time_start = microtime(true);
 	
 	echo " 	
-	<style>.test-table {float:left;} .test-table td {border:solid 1px #000;}</style> 
 	
-	<table class='test-table'>
-	<tr><td colspan='2'>Dan Huckson prime3</td></tr>
-	<tr><td>Count</td><td>Prime Number</td></tr>";
+	<table class='primes'>
+	<tr><th colspan='2'>Dan V3</th></tr>
+	<tr><th>#</th><th>Prime</th></tr>";
 	
 	$count=0; 
 	for ($i=2; $count < $n; $i++) {
@@ -148,10 +143,9 @@ function prime4($n) {
 	
 	$total = 0;
 	echo " 	
-	<style>.test-table {float:left;} .test-table td {border:solid 1px #000;}</style> 
-	<table class='test-table'>
-	<tr><td colspan='2'>Geoff prime4</td></tr>
-	<tr><td>Count</td><td>Prime Number</td></tr>";
+	<table class='primes'>
+	<tr><th colspan='2'>Geoff V0</th></tr>
+	<tr><th>#</th><th>Prime</th></tr>";
 	
 	for ($x = 1; $total < $n; $x++) {
 		$count = 2;
@@ -178,19 +172,42 @@ echo '
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>Pioneer Primes</title>
+        <style>
+            .primes {float:left; border-collapse: collapse; } 
+            .primes ~ .primes {margin-left:10px; }
+            .primes th { border:solid 1px #000;border-top:solid 1px #aaa;color: #fff;  text-align: center; background: #000;}
+            .primes td { border:solid 1px #000; padding: 2px; text-align: right; }
+
+            .results { float:left; margin-left: 10px; border-collapse: collapse;}
+            .results th { border:solid 1px #000;border-top:solid 1px #aaa;color: #fff;  text-align: center; background: #000; }
+            .results td { border:solid 1px #000; padding: 2px; }
+
+
+        </style> 
 	</head>
 	<body>';
-		$times = array(
-            prime0($max), 
-            prime1($max),
-            prime2($max),
-            prime3($max),
-            prime4($max)
+		$functions = array(
+            array('Dan Huckson V0' => prime0($max)), 
+            array('Dan Huckson V1' => prime1($max)),
+            array('Dan Huckson V2' => prime2($max)),
+            array('Dan Huckson V3' => prime3($max)),
+            array('Geoff V0' => prime4($max))
         );
-        foreach ($times as $i => $time) {
-           echo "<div>prime$i = $time</div>"; 
+        
+        echo " 
+        <table class='results'>
+            <tr><th colspan='3'>Runtime Results</th></tr> ";
+            foreach ($functions as $function) {
+            echo "
+            <tr>";
+                foreach ($function as $key => $time) {
+                echo "<td>$key</td><td>&gt;</td><td>$time</td>"; 
+            }
+            echo " 
+            </tr>";
         }
+        echo "</table>";
 	echo '
 	</body>
 </html>';
