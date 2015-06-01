@@ -24,7 +24,7 @@ function prime0($n) {
     
 	echo "
 	</table>";
-    
+     
     return $runtime;
 }
 
