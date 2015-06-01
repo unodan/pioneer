@@ -9,9 +9,9 @@ function prime0($n) {
         <tr><th colspan='2'>Dan V0</th></tr>
         <tr><th>#</th><th>Prime</th></tr>";
     
-    for ($count = 0, $prime = 1, $i = $x = 2; $count++ < $n; $prime = 1, $i = 2, $sqrt = sqrt(++$x)) {
+    for ($count=0,$prime=1,$i=$x=2; $count++<$n; $prime=1,$i=2,$j=sqrt(++$x)) {
         if ($x > 2) {
-            while ($i <= $sqrt) 
+            while ($i <= $j) 
                 if ($x%$i++ == 0) {
                     $prime--; 
                     break;
