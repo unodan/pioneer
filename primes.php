@@ -9,22 +9,23 @@ function prime0($n) {
         <tr><th colspan='2'>Dan V0</th></tr>
         <tr><th>#</th><th>Prime</th></tr>";
     
-    for ($count=0,$prime=1,$i=$x=2; $count++<$n; $prime=1,$i=2,$j=sqrt(++$x)) {
-        if ($x > 2) {
-            while ($i <= $j) 
+    
+    for ($i=$x=2,$count=0; $count<$n; $x++,$prime=1,$sqrt=sqrt($x)) {
+        if ($x > 2) 
+            while ($i <= $sqrt) 
                 if ($x%$i++ == 0) {
-                    $prime--; 
+                    $prime=0; 
                     break;
                 } 
-        }
-        if ($prime) echo "
-        <tr><td>$count</td><td>$x</td></tr>";	
+        
+        if ($prime) 
+            echo "<tr><td>".(++$count)."</td><td>$x</td></tr>";	
     }
     $runtime = microtime(true) - $time_start;
     
 	echo "
 	</table>";
-     
+    
     return $runtime;
 }
 
@@ -84,7 +85,7 @@ function prime2($n) {
 		// If $i is not a prime number the loop is termanated by breaking out of the loop.
 		$x = $i/2+1; 
 		for ($j=2; $j<$x; $j++) {
-			if ($i%$j === 0) { // If we have no remainder the number is not a prime number. 
+			if (!($i%$j)) { // If we have no remainder the number is not a prime number. 
 				$result=FALSE; // Set result to false not a prime number.
 				break; // Save some CPU cycles, no need to continue looping if number is not prime a number.
 			}
