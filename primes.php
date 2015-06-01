@@ -9,20 +9,16 @@ function prime0($n) {
         <tr><th colspan='2'>Dan V0</th></tr>
         <tr><th>#</th><th>Prime</th></tr>";
     
-    $count = 0;
-    for ($x = 2; $count < $n; $x++) {
-        $i = 2;
-        $prime = 1;
-        $sqrt = sqrt($x);
-        if ($x > 2) 
+    for ($count = 0, $prime = 1, $i = $x = 2; $count++ < $n; $prime = 1, $i = 2, $sqrt = sqrt(++$x)) {
+        if ($x > 2) {
             while ($i <= $sqrt) 
                 if ($x%$i++ == 0) {
-                    $prime = 0; 
+                    $prime--; 
                     break;
                 } 
-        
+        }
         if ($prime) echo "
-        <tr><td>".(++$count)."</td><td>$x</td></tr>";	
+        <tr><td>$count</td><td>$x</td></tr>";	
     }
     $runtime = microtime(true) - $time_start;
     
