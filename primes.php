@@ -84,7 +84,7 @@ function prime2($n) {
 		// If $i is not a prime number the loop is termanated by breaking out of the loop.
 		$x = $i/2+1; 
 		for ($j=2; $j<$x; $j++) {
-			if (!($i%$j)) { // If we have no remainder the number is not a prime number. 
+			if ($i%$j === 0) { // If we have no remainder the number is not a prime number. 
 				$result=FALSE; // Set result to false not a prime number.
 				break; // Save some CPU cycles, no need to continue looping if number is not prime a number.
 			}
